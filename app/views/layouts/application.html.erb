@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Primary</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <meta name="generator" content="Bootply" />
+		
+		<!--[if lt IE 9]>
+			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<%= render 'layouts/header' %>
+		<div class="container">
+		<% flash.each do |message_type, message| %>
+			<div class ="alert alert-<%=message_type%>"><%= message %></div>
+			<% end %>
+		<%= yield%>
+		<%= debug(params) if Rails.env.development? %>
+
+</body>
+</html>

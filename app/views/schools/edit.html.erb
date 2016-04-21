@@ -1,0 +1,20 @@
+<div class="container">
+	<div class="row">
+		<h2>Edit School</h2>
+		<%= form_for @school do |f| %>
+			<%=f.label :name %>
+			<%= f.text_field :name, class: 'form-control'  %>
+
+			<%= f.label :address %>
+			<%= f.text_field :address, class:'form-control' %>
+
+			<%= f.label :fees %>
+			<%= f.text_field :fees, class:'form-control' %>
+
+			<%= f.label :state %>
+			<%= f.text_field :state, class:'form-control' %>
+
+			<%= f.submit "Save School", class:'btn btn-primary' %>
+<% end %>
+</div>
+</div>

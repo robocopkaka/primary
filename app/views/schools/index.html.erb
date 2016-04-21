@@ -1,0 +1,7 @@
+<%= render 'schools/schools' %> 
+
+<% unless @lat_lng %>
+  <script>
+    getGeoLocation();
+  </script>
+<% end %>
