@@ -1,11 +1,11 @@
 class SchoolsController < ApplicationController
   def index
-    @lat_lng = cookies[:lat_lng].split("|")
+    @lat_lng = cookies[:lat_lng].try(:split, "|")
     if @lat_lng.nil?
       @user_coords = request.ip
-      @schools = School.near(@user_coords, 10).paginate(page: params[:page], per_page: 9)
+      @schools = School.near(@user_coords, 20).paginate(page: params[:page], per_page: 9)
     else
-      @schools = School.near(@lat_lng, 10).paginate(page: params[:page], per_page: 9)
+      @schools = School.near(@lat_lng, 20).paginate(page: params[:page], per_page: 9)
     end
     
   end

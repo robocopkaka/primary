@@ -14,7 +14,13 @@ Rails.application.routes.draw do
 
   root 'schools#index'
 
-  resources :schools
+  resources :schools do
+    resources :comments
+  end
+
+  resources :comments do
+    resources :comments
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

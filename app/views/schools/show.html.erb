@@ -1,3 +1,14 @@
-Name: <%= @school.name %>
+<% if @school.image_url.nil? %>
+  <%= render 'schools/has_no_picture' %>
+<% else %>
+  <%= render 'schools/has_picture' %>
+<%  end %>
 
-<%= link_to "Edit", edit_school_path %>
+<%= form_for [@school, Comment.new] do |f| %>
+  <%= f.text_field :body, {placeholder: 'Add a comment', class:'form-control'} %> <br/>
+  <%= f.submit "Add comment", class:'form-control' %>
+<% end %>
+
+<ul>
+  <%= render(partial: 'comments/comment', collection: @school.comments) %>
+</ul>
