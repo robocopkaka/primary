@@ -1,7 +1,8 @@
 <li>
-	<%= comment.body %>
-	<small>Submitted at <%= time_ago_in_words(comment.created_at) %></small>
-
+	<div class="comment">
+		<%= comment.body %>
+		<small>Submitted at <%= time_ago_in_words(comment.created_at) %></small>
+	</div>
 	<%= form_for [comment, Comment.new] do |f| %>
 		<%= f.text_field :body, {placeholder: 'Add a reply', class: 'form-control'} %>
 		<%= f.submit "Reply", class: 'form-control' %>

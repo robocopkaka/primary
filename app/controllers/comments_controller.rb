@@ -22,8 +22,8 @@ class CommentsController < ApplicationController
 	end
 
 	def find_commentable
-		@commentable = Comment.find_by(id: params[:comment_id]) if params[:comment_id]
-		@commentable = School.find_by(id: params[:school_id]) if params[:school_id]
+		@commentable = Comment.find_by(id: params[:comment_id]) if params[:comment_id] #checks if what is to be  commented on is a comment
+		@commentable = School.find_by(id: params[:school_id]) if params[:school_id] #checks if what is to be commented on is a school
 	end
 
 end
