@@ -16,3 +16,14 @@
 
         <div class="clearfix"></div>
 </div>
+
+
+<div class="panel panel-default bootcards-media">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= school.name %></h3>
+  </div>
+  <div class="panel-body">
+    <%= school.address %>
+  </div>
+  <%= image_tag(@school.image_url, :size => "400x400", class:'img-responsive') %>
+</div>

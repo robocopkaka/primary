@@ -6,7 +6,7 @@
 
 <div class="commentlist">
 <%= form_for [@school, Comment.new] do |f| %>
-  <%= f.text_field :body, {placeholder: 'Add a comment', class:'form-control'} %> <br/>
+  <%= f.text_field :body, {placeholder: 'Add a comment', class:'comment'} %> <br/>
   <%= f.submit "Add comment", class:'form-control' %>
 <% end %>
 
