@@ -2,41 +2,51 @@
 
   <div class="panel panel-default bootcards-media">
   <div class="panel-heading">
-    <h3 class="panel-title"><%= @school.name %></h3>
+    <h3 class="panel-title" align="center"><%= @school.name %></h3>
   </div>
   <div class="panel-body">
-    <%= @school.address %>
+    
   </div>
   <%= image_tag("school_children.jpg", :size => "500x500", class:'img-responsive center-block') %>
   <div class="panel-footer">
-    <div class="btn-group btn-group-justified">
-      <div class="btn-group">
-        <button class="btn btn-default">
-          <i class="fa fa-arrow-down"></i>
-          Download
-        </button>
+      <div align="center" font-weight="bold" font-size="16px">
+        <%= @school.address.titleize %>
       </div>
-      <div class="btn-group">
-        <button class="btn btn-default">
-          <i class="fa fa-star"></i>
-          Favorite
-        </button>
-      </div>
-      <div class="btn-group">
-        <button class="btn btn-default">
-          <i class="fa fa-envelope"></i>
-          Email
-        </button>
-      </div>
-    </div>
   </div>
 </div>
   
+   
 
-        <div class="col-md-8">
-            <div class="thumbnail">
-                <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@school.latitude}%2C#{@school.longitude}" %>
-
+        <div class="col-md-6">
+          <div class="panel panel-default bootcards-media">
+            <div class="panel-heading">
+              <h3 class="panel-title" align="center">Don't know where the address is? We've got you covered</h3>
+            </div>
+            <div class="panel-body">
+    
+            </div>
+            <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@school.latitude}%2C#{@school.longitude}" %>
+      
+          </div>
+       
         </div>
 
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+              <h3 class="panel-title pull-left">Comments</h3>
+            </div>
+            <div class="panel-body">
+              <div class="commentlist">
+              <%= form_for [@school, Comment.new] do |f| %>
+                <%= f.text_field :body, {placeholder: 'Add a comment', class:'comment'} %> <br/>
+                <%= f.submit "Add comment", class:'form-control' %>
+              <% end %>
+
+              <ul>
+                <%= render(partial: 'comments/comment', collection: @school.comments) %>
+              </ul>
+            </div>
+          </div>
+        </div>
         <div class="clearfix"></div>
