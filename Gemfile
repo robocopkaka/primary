@@ -30,6 +30,8 @@ gem 'faker' #generates fake stuff
 gem 'will_paginate' #pagination gem
 gem 'bootstrap-will_paginate' #helps style pagination gem
 
+gem 'simple_form' #simple_form gem
+
 #image processing gems
 gem 'fog' #helps with uploading image
 gem 'carrierwave' #helps with uploading images and manipulating their dimensions

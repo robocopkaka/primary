@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160422171154) do
+ActiveRecord::Schema.define(version: 20160504110926) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"
@@ -20,6 +20,26 @@ ActiveRecord::Schema.define(version: 20160422171154) do
     t.integer  "rating"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+  end
+
+  create_table "ratings", force: :cascade do |t|
+    t.integer  "school_id"
+    t.integer  "user_id"
+    t.integer  "score",      default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "ratings", ["school_id"], name: "index_ratings_on_school_id"
+  add_index "ratings", ["user_id"], name: "index_ratings_on_user_id"
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "rating"
+    t.text     "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.integer  "school_id"
   end
 
   create_table "schools", force: :cascade do |t|

@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-12"><h2>Hey! Looks like there are some schools near you :)</h2></div>
+   
    <% @schools.each do |school| %>
        <div class="col-sm-6 col-md-4">
       <div class="panel panel-default">
@@ -17,6 +17,11 @@
               </p>
               <h5><%= link_to "View More details", school_path(school) %></h5>
               
+            </div>
+            <div class="panel-footer">
+              <div class="user_star">
+                
+              </div>
             </div>
          </div> 
     </div>

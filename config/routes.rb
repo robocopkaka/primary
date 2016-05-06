@@ -12,15 +12,26 @@ Rails.application.routes.draw do
 
   get 'schools/show'
 
+  get 'ranking' => 'schools#schools_by_ranking'
+
   root 'schools#index'
 
   resources :schools do
-    resources :comments
+    resources :reviews
   end
 
   resources :comments do
     resources :comments
   end
+
+  resources :ratings, only: :update
+
+  #schould be removed later for best practice
+  devise_scope :user do
+    get 'users/sign_out' => 'devise/sessions#destroy'
+  end
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

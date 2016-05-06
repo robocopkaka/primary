@@ -9,8 +9,10 @@
   </div>
   <%= image_tag("school_children.jpg", :size => "500x500", class:'img-responsive center-block') %>
   <div class="panel-footer">
-      <div align="center" font-weight="bold" font-size="16px">
-        <%= @school.address.titleize %>
+      <div>
+        <h2 class="avg-rating">Average</h2>
+        <div class="average-review-rating" data-score=<%= @average_review %>></div>
+        <span class="number-of-reviews">Based on <%= @school.reviews.count %> reviews</span>
       </div>
   </div>
 </div>
@@ -26,6 +28,12 @@
     
             </div>
             <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@school.latitude}%2C#{@school.longitude}" %>
+
+            <div class="panel-footer">
+              <div align="center" font-weight="bold" font-size="16px">
+                <%= @school.address.titleize %>
+              </div>         
+            </div>
       
           </div>
        
@@ -34,19 +42,16 @@
         <div class="col-md-6">
           <div class="panel panel-default">
             <div class="panel-heading clearfix">
-              <h3 class="panel-title pull-left">Comments</h3>
+              <h3 class="panel-title pull-left">Reviews</h3>
             </div>
             <div class="panel-body">
-              <div class="commentlist">
-              <%= form_for [@school, Comment.new] do |f| %>
-                <%= f.text_field :body, {placeholder: 'Add a comment', class:'comment'} %> <br/>
-                <%= f.submit "Add comment", class:'form-control' %>
-              <% end %>
-
-              <ul>
-                <%= render(partial: 'comments/comment', collection: @school.comments) %>
-              </ul>
-            </div>
+              <%= render @school.reviews %>
+              <div class="reviews">
+                <div class="links btn-group">
+                  <%= link_to "Add Review", new_school_review_path(@school), class:"btn btn-custom padding-top:10px"%>
+                </div>
+              </div>
           </div>
         </div>
+
         <div class="clearfix"></div>

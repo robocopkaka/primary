@@ -1,0 +1,24 @@
+{
+  "name": "primary",
+  "authors": [
+    "onyekachi"
+  ],
+  "description": "primary schools",
+  "main": "app/views/schools/index.html.erb",
+  "keywords": [
+    "rails"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "raty": "^2.7.0"
+  }
+}

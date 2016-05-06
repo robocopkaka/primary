@@ -1,5 +1,5 @@
-<div class="container">
-	<div class="row">
+<div class="col-md-6 col-md-offset-3">
+	<div class="new-book-form">
 		<%= form_for @school do |f| %>
 			<%=f.label :name %>
 			<%= f.text_field :name, class: 'form-control'  %>
@@ -13,7 +13,7 @@
 			<%= f.label :state %>
 			<%= f.text_field :state, class:'form-control' %>
 
-			<%= f.submit "Save School", class:'btn btn-primary' %>
+			<%= f.submit "Save School", class:'btn-custom2' %>
 		<% end %>
 	</div>
 </div>
