@@ -8,8 +8,8 @@ class ReviewsController < ApplicationController
 
 	def create
 		@review = Review.new(review_params)
-		@review.school_id = @school.id
-		@review.user_id = current_user.id
+		@review.school_id = @school.id #helps save to the reviews table, since we aren't using .build I guess 
+		@review.user_id = current_user.id #helps save to the reviews table, since we aren't using .build I guess
 
 		if @review.save
 			redirect_to school_path(@school)
@@ -41,9 +41,12 @@ class ReviewsController < ApplicationController
 		params.require(:review).permit(:rating, :comment)
 	end
 
+	#used to help refactor code. So instead of defining @review = Review.find(params[:id]) in diff methods, we do this once, and use before_action to specify which methods will call it
 	def find_review
 		@review = Review.find(params[:id])
 	end
+
+	#used to help refactor code. So instead of defining @school = School.find(params[:id]) in diff methods, we do this once, and use before_action to specify which methods will call it
 	def find_school
 		@school = School.find(params[:school_id])
 	end

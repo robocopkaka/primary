@@ -52,6 +52,7 @@ class SchoolsController < ApplicationController
   def schools_by_ranking
    # @schools = Review.select('reviews.id').joins('LEFT OUTER JOIN reviews ON (reviews.school_id = t2.school_id AND reviews.rating > t2.rating)').where('t2.school_id IS NULL')
    @schools = School.joins(:reviews).order('rating DESC').where('rating>3').to_a.uniq.paginate(page: params[:page], :per_page => 10)
+   #use to_a before .uniq to avoid an error with postgres in production
   end
 
   private
