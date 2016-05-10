@@ -1,16 +1,19 @@
 require 'will_paginate/array'
 class SchoolsController < ApplicationController
   before_action :authenticate_user, only: [:new, :edit]
+  #before_action :find_coordinates, only: :index
   def index
-    @lat_lng = cookies[:lat_lng].try(:split, "|")
+    # @lat_lng = cookies[:lat_lng].try(:split, "|") || request.ip
+    # @schools = School.near(@lat_lng, 30).paginate(page: params[:page], per_page: 9)
+   # @schools = School.all.paginate(page: params[:page], per_page: 10)
+
+     @lat_lng = cookies[:lat_lng].try(:split, ",") || request.ip.split(",")
     if @lat_lng.nil?
-      @user_coords = request.ip
+      @user_coords = request.location
       @schools = School.near(@user_coords, 30).paginate(page: params[:page], per_page: 9)
     else
       @schools = School.near(@lat_lng, 30).paginate(page: params[:page], per_page: 9)
     end
-
-   # @schools = School.all.paginate(page: params[:page], per_page: 10)
   end
 
   def new
@@ -64,6 +67,17 @@ class SchoolsController < ApplicationController
     if !user_signed_in?
       redirect_to new_user_session_url
     end
+  end
+
+  def find_coordinates
+    @lat_lng = cookies[:lat_lng].try(:split, "|")
+    if @lat_lng.nil?
+      @user_coords = request.location
+      @schools = School.near(@user_coords, 30).paginate(page: params[:page], per_page: 9)
+    else
+      @schools = School.near(@lat_lng, 30).paginate(page: params[:page], per_page: 9)
+    end
+
   end
 
 end
