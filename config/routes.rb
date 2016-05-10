@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
   get 'ranking' => 'schools#schools_by_ranking'
 
+  get 'nearby' => 'schools#schools_near_you'
+
   root 'schools#index'
 
   resources :schools do
