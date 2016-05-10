@@ -1,3 +1,20 @@
+<% if @schools.blank? %>
+		<div class="panel panel-default">
+	  <div class="panel-heading clearfix">
+	    <h3 class="panel-title pull-left">We can't seem to find schools near you</h3>
+	  </div>
+	  <div class="panel-body">
+	    <p>Awww, looks like there's no school currently within a 30 mile radius of your location that has 
+	    been added to out system here. But if there are some around you, you could help the cause, and add them <%= link_to "right here.", new_school_path %></p>
+	  </div>
+	</div>
+<% else %>
  <div class="col-md-12"><h2>Hey! Looks like there are some schools near you :)</h2></div>
+ 	<%= render 'schools' %>
+<% end %>
 
- <%= render 'schools' %>
+<% unless @lat_lng %>
+  <script>
+    getGeoLocation();
+  </script>
+<% end %>
