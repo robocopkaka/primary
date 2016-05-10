@@ -18,7 +18,7 @@ class SchoolsController < ApplicationController
   end
 
   def schools_near_you    
-     @lat_lng ||= cookies[:lat_lng].try(:split, ",")  || [request.location.latitude, request.location.longitude]
+     @lat_lng ||= cookies[:lat_lng].try(:split, "|") 
     
       @schools = School.near(@lat_lng, 30).paginate(page: params[:page], per_page: 9)
   end
