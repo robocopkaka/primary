@@ -30,9 +30,9 @@ class SchoolsController < ApplicationController
   def create
     @school = School.new(school_params)
     if @school.save
-      redirect_to 'index' #using redirect_to forces rails to hit the index controller first. Render skips and just renders the view
+      redirect_to school_path(@school) #using redirect_to forces rails to hit the index controller first. Render skips and just renders the view
     else
-      redirect_to 'index'
+      render 'new'
     end
   end
 
@@ -61,13 +61,13 @@ class SchoolsController < ApplicationController
   #method to find top ranked school
   def schools_by_ranking
    # @schools = Review.select('reviews.id').joins('LEFT OUTER JOIN reviews ON (reviews.school_id = t2.school_id AND reviews.rating > t2.rating)').where('t2.school_id IS NULL')
-   @schools = School.joins(:reviews).order('rating DESC').where('rating>3').to_a.uniq.paginate(page: params[:page], :per_page => 10)
+   @schools = School.joins(:reviews).select("schools.*, avg(reviews.rating) as average_rating").group("schools.id").order("average_rating DESC").paginate(page: params[:page], per_page:9) 
    #use to_a before .uniq to avoid an error with postgres in production
   end
 
   private
   def school_params
-    params.require(:school).permit(:name, :address, :fees, :reg_fees, :state)
+    params.require(:school).permit(:name, :address, :fees, :reg_fees, :state, :image)
   end
 
   def authenticate_user

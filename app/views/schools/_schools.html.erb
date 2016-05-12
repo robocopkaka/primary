@@ -3,12 +3,12 @@
    <% @schools.each do |school| %>
        <div class="col-sm-6 col-md-4">
       <div class="panel panel-default">
-           <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4><%= school.name %></h4></div>
+           <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4><%= school.name.titleize %></h4></div>
         <div class="panel-body">
             <% if school.image_url.nil? %>
               <%= image_tag("school_children.jpg", size:"150x150", class: 'img-circle center-block') %>
             <% else %>
-              <%= image_tag(@school.image_url(:thumb), class: 'img-circle center-block') %> 
+              <%= image_tag(school.image_url(:thumb), class: 'img-circle center-block') %> 
             <% end %>
               
               <div class="clearfix"></div>

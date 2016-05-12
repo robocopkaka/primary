@@ -1,6 +1,6 @@
 <div class="col-md-6 col-md-offset-3">
 	<div class="new-book-form">
-		<%= form_for @school do |f| %>
+		<%= form_for (@school), html:{multipart: true} do |f| %>
 			<%=f.label :name %>
 			<%= f.text_field :name, class: 'form-control'  %>
 
@@ -12,6 +12,9 @@
 
 			<%= f.label :state %>
 			<%= f.text_field :state, class:'form-control' %>
+
+			<%= f.file_field :image, value: "School Image", accept: 'image/jpeg,image/gif,image/png', id: 'book_book_img' %>
+			<%= f.hidden_field :image_cache %>
 
 			<%= f.submit "Save School", class:'btn-custom2' %>
 		<% end %>

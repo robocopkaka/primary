@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class PictureUploader < CarrierWave::Uploader::Base
-
+  include CarrierWave::MiniMagick
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
@@ -45,7 +45,7 @@ class PictureUploader < CarrierWave::Uploader::Base
    end
 
    version :thumb do
-    process resize_to_fill: [250, 250]
+    process resize_to_fill: [150, 150]
    end
 
   # Override the filename of the uploaded files:
