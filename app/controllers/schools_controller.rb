@@ -4,7 +4,8 @@ class SchoolsController < ApplicationController
   #before_action :find_coordinates, only: :index
   def index
 
-    @schools = School.all.paginate(page: params[:page], per_page: 10)
+
+    @schools = School.limit(9).order("RANDOM()").paginate(page: params[:page], per_page: 9)
 
     # @lat_lng = cookies[:lat_lng].try(:split, "|") || [request.location.latitude, request.location.longitude]
     # if @lat_lng.nil?
@@ -18,7 +19,7 @@ class SchoolsController < ApplicationController
   end
 
   def schools_near_you    
-     @lat_lng ||= cookies[:lat_lng].try(:split, "|") 
+     @lat_lng ||= cookies[:lat_lng].try(:split, "|")  || request.location.coordinates
     
       @schools = School.near(@lat_lng, 30).paginate(page: params[:page], per_page: 9)
   end
@@ -79,7 +80,7 @@ class SchoolsController < ApplicationController
   def find_coordinates
     @lat_lng = cookies[:lat_lng].try(:split, "|")
     if @lat_lng.nil?
-      @user_coords = request.location
+      @user_coords = request.location.coordinates
       @schools = School.near(@user_coords, 30).paginate(page: params[:page], per_page: 9)
     else
       @schools = School.near(@lat_lng, 30).paginate(page: params[:page], per_page: 9)

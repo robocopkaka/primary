@@ -1,6 +1,11 @@
 <div class="row">
    
    <% @schools.each do |school| %>
+               <% if school.reviews.blank? %>
+                <% average_review2 = 0 %>
+              <% else %>
+                <% average_review2 = school.reviews.average(:rating).round(2) %>
+              <% end %>
        <div class="col-sm-6 col-md-4">
       <div class="panel panel-default">
            <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4><%= school.name.titleize %></h4></div>
@@ -19,9 +24,7 @@
               
             </div>
             <div class="panel-footer">
-              <div class="user_star">
-                
-              </div>
+              <div class="average-review-rating" data-score=<%= average_review2 %>></div>
             </div>
          </div> 
     </div>
