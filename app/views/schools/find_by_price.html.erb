@@ -1,0 +1,11 @@
+<%= form_tag("/find_by_price", method: "get") do %>
+	<%= label_tag :Price_Between %>
+	<%= text_field_tag :price1 %>
+
+	<%= label_tag :and %>
+	<%= text_field_tag :price2%>
+
+	<%= submit_tag "Search" %>
+<% end %>
+
+<%= render 'schools/schools' %>

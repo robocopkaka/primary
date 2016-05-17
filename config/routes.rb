@@ -16,6 +16,8 @@ Rails.application.routes.draw do
 
   get 'nearby' => 'schools#schools_near_you'
 
+  get 'find_by_price' => 'schools#find_by_price'
+
   root 'schools#index'
 
   resources :schools do

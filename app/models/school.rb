@@ -18,4 +18,6 @@ class School < ActiveRecord::Base
 	def average_rating
   		ratings.sum(:score) / ratings.size
 	end
+
+	scope :between, -> (price1, price2) {where(fees: price1..price2).order('fees DESC')}
 end

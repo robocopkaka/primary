@@ -14,6 +14,7 @@
 //= require raty/lib/jquery.raty.js
 //= require bootstrap
 //= require jquery_ujs
+//= require jquery-ui
 //= require turbolinks
 //= require_tree .
 function getGeoLocation() {

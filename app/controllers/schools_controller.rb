@@ -3,9 +3,14 @@ class SchoolsController < ApplicationController
   before_action :authenticate_user, only: [:new, :edit]
   #before_action :find_coordinates, only: :index
   def index
-
-
-    @schools = School.limit(9).order("RANDOM()").paginate(page: params[:page], per_page: 9)
+    #code to produce 9 random records pulled from http://blog.endpoint.com/2016/05/randomized-queries-in-ruby-on-rails.html?m=1
+    desired_records = 9
+    count= desired_records * 3
+    offset = rand([School.count - count, 1].max)
+    set = School.limit(count).offset(offset).pluck(:id)
+    @schools = School.includes(:reviews).find(set.sample(desired_records)).paginate(page: params[:page], per_page:10)#includes uses eager loading to solve the N + ! queries problem, reducing number of 
+    #queries to 4 including one query to find count, and one to finf AVERAGE
+    #@schools = School.limit(9).order("RANDOM()").paginate(page: params[:page], per_page: 9)
 
     # @lat_lng = cookies[:lat_lng].try(:split, "|") || [request.location.latitude, request.location.longitude]
     # if @lat_lng.nil?
@@ -64,6 +69,11 @@ class SchoolsController < ApplicationController
    # @schools = Review.select('reviews.id').joins('LEFT OUTER JOIN reviews ON (reviews.school_id = t2.school_id AND reviews.rating > t2.rating)').where('t2.school_id IS NULL')
    @schools = School.joins(:reviews).select("schools.*, avg(reviews.rating) as average_rating").group("schools.id").order("average_rating DESC").paginate(page: params[:page], per_page:9) 
    #use to_a before .uniq to avoid an error with postgres in production
+  end
+
+  def find_by_price
+    @schools = School.includes(:reviews).between(params[:price1], params[:price2]).paginate(page: params[:page], per_page: 10)
+
   end
 
   private
