@@ -72,7 +72,7 @@ class SchoolsController < ApplicationController
   end
 
   def find_by_price
-    @schools = School.includes(:reviews).between(params[:price1], params[:price2]).paginate(page: params[:page], per_page: 10)
+    @schools = School.includes(:reviews).between(params[:price1], params[:price2]).paginate(page: params[:page], per_page:9)
 
   end
 

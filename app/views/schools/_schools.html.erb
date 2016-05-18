@@ -7,8 +7,11 @@
                 <% average_review2 = school.reviews.average(:rating).round(2) %>
               <% end %>
        <div class="col-sm-6 col-md-4">
+       
       <div class="panel panel-default">
-           <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4><%= school.name.titleize %></h4></div>
+        <%= link_to school_path(school) do %>
+           <div class="panel-heading"> <h4><%= school.name.titleize %></h4></div>
+        <% end %>
         <div class="panel-body">
             <% if school.image_url.nil? %>
               <%= image_tag("school_children.jpg", size:"150x150", class: 'img-circle center-block') %>
