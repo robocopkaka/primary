@@ -76,6 +76,31 @@ class SchoolsController < ApplicationController
 
   end
 
+  def calculate_total_fees
+    session[:school_id] = params[:id]
+    @school_id= session[:school_id]
+    @school = School.find(session[:school_id])
+    @current_class = params[:current_class]
+    #first run to see if I can determine someone's school fees estimate for a particular class
+    if @current_class == "Primary One"
+      @current_fees = @school.primary_one + @school.primary_two + @school.primary_three + @school.primary_four + @school.primary_five + @school.primary_six + @school.reg_fees + @school.exam_fees
+    elsif @current_class == "Primary Two"
+      @current_fees = @school.primary_two + @school.primary_three + @school.primary_four + @school.primary_five + @school.primary_six + @school.reg_fees + @school.exam_fees
+    elsif @current_class == "Primary Three"
+      @current_fees = @school.primary_three + @school.primary_four + @school.primary_five + @school.primary_six + @school.reg_fees + @school.exam_fees
+    elsif @current_class == "Primary Four"
+       @current_fees = @school.primary_four + @school.primary_five + @school.primary_six + @school.reg_fees + @school.exam_fees
+    elsif @current_class == "Primary Five"
+       @current_fees =@school.primary_five + @school.primary_six + @school.reg_fees + @school.exam_fees
+    elsif @current_class == "Primary Six"
+       @current_fees = @school.primary_six + @school.reg_fees + @school.exam_fees
+    else
+
+    end
+
+    #@current_fees = @school.primary_one + @school.primary_two + @school.primary_three + @school.primary_four + @school.primary_five + @school.primary_six
+  end
+
   private
   def school_params
     params.require(:school).permit(:name, :address, :fees, :reg_fees, :state, :image)

@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
   get 'find_by_price' => 'schools#find_by_price'
 
+  get 'calculate_total_fees' => 'schools#calculate_total_fees'
+
   root 'schools#index'
 
   resources :schools do

@@ -1,0 +1,9 @@
+<div class="col-md-6 col-md-offset-3">
+	<div class="new-book-form">
+	<%= form_tag(calculate_total_fees_path(id: @school_id), method: :get) do%>
+		<%= select_tag "current_class", options_for_select(["Primary One", "Primary Two", "Primary Three", "Primary Four", "Primary Five", "Primary Six"])%>
+		<%= submit_tag "Calculate", controller: "schools", action: "calculate_total_fees", id: @school_id%>
+	<% end %>
+	</div>
+	Its going to cost you <%= @current_fees %> to send your child to school 
+</div>

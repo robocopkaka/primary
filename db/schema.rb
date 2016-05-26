@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160504110926) do
+ActiveRecord::Schema.define(version: 20160523061201) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"
@@ -49,11 +49,18 @@ ActiveRecord::Schema.define(version: 20160504110926) do
     t.integer  "reg_fees"
     t.integer  "student_size"
     t.string   "image"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.float    "latitude"
     t.float    "longitude"
     t.string   "state"
+    t.integer  "primary_one"
+    t.integer  "primary_two"
+    t.integer  "primary_three"
+    t.integer  "primary_four"
+    t.integer  "primary_five"
+    t.integer  "primary_six"
+    t.integer  "exam_fees"
   end
 
   create_table "users", force: :cascade do |t|

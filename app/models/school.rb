@@ -20,4 +20,6 @@ class School < ActiveRecord::Base
 	end
 
 	scope :between, -> (price1, price2) {where(fees: price1..price2).order('fees DESC')}
+
+	CLASSES = ["Primary One", "Primary Two", "Primary Three", "Primary Four", "Primary Five", "Primary Six"]
 end
