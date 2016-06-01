@@ -1,9 +1,17 @@
-<div class="col-md-6 col-md-offset-3">
-	<div class="new-book-form">
-	<%= form_tag(calculate_total_fees_path(id: @school_id), method: :get) do%>
-		<%= select_tag "current_class", options_for_select(["Primary One", "Primary Two", "Primary Three", "Primary Four", "Primary Five", "Primary Six"])%>
-		<%= submit_tag "Calculate", controller: "schools", action: "calculate_total_fees", id: @school_id%>
+	<%= form_tag(@school, method: :get, remote: true) do |f|%>
+	   <%= select_tag(:class_id, options_for_select(CurrentClass.all.map{ |f| [f.current, f.id]}),:selected => params[:class_id], :prompt => "Select Class") %>
+		<%= submit_tag "Calculate", class: "calculate_fees"%>
 	<% end %>
-	</div>
-	Its going to cost you <%= @current_fees %> to send your child to school 
-</div>
+
+It's going to cost you <%= @current_fees %> to send your kid to this school
+<script type = "text/javascript">
+$(".calculate_fees").on("click", function(){
+    $.ajax({
+        url: "schools/calculate_total_fees/id=" + <%= @school.id %>,
+        data: <%= @current_fees %>,
+        success: function(data) {
+            alert(data)
+        }
+    });
+});
+</script> 

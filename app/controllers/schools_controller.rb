@@ -57,11 +57,19 @@ class SchoolsController < ApplicationController
 
   def show
     @school = School.find_by(id: params[:id])
+    @first_child_class = params[:class_id]
+    @second_child_class = params[:class_id2]
+    @current_fees = 0
+    calculate_total_fees
+    byebug
     if @school.reviews.blank? # checks if the school has any ratings, and if it doesn't, assign 0 to th average
       @average_review = 0
     else
      @average_review =  @school.reviews.average(:rating).round(2)
     end
+  end
+
+  def check
   end
 
   #method to find top ranked school
@@ -77,28 +85,31 @@ class SchoolsController < ApplicationController
   end
 
   def calculate_total_fees
-    session[:school_id] = params[:id]
-    @school_id= session[:school_id]
-    @school = School.find(session[:school_id])
-    @current_class = params[:current_class]
+    @school = School.find_by(id: params[:id])
+     @available_class = params[:class_id]
+    @current_fees = 0
     #first run to see if I can determine someone's school fees estimate for a particular class
-    if @current_class == "Primary One"
+    if @available_class == "1"
       @current_fees = @school.primary_one + @school.primary_two + @school.primary_three + @school.primary_four + @school.primary_five + @school.primary_six + @school.reg_fees + @school.exam_fees
-    elsif @current_class == "Primary Two"
+    elsif @available_class == "2"
       @current_fees = @school.primary_two + @school.primary_three + @school.primary_four + @school.primary_five + @school.primary_six + @school.reg_fees + @school.exam_fees
-    elsif @current_class == "Primary Three"
+    elsif @available_class == "3"
       @current_fees = @school.primary_three + @school.primary_four + @school.primary_five + @school.primary_six + @school.reg_fees + @school.exam_fees
-    elsif @current_class == "Primary Four"
+    elsif @available_class == "4"
        @current_fees = @school.primary_four + @school.primary_five + @school.primary_six + @school.reg_fees + @school.exam_fees
-    elsif @current_class == "Primary Five"
+    elsif @available_class == "5"
        @current_fees =@school.primary_five + @school.primary_six + @school.reg_fees + @school.exam_fees
-    elsif @current_class == "Primary Six"
+    elsif @available_class == "6"
        @current_fees = @school.primary_six + @school.reg_fees + @school.exam_fees
     else
 
     end
 
     #@current_fees = @school.primary_one + @school.primary_two + @school.primary_three + @school.primary_four + @school.primary_five + @school.primary_six
+    # respond_to do |format|
+    #     format.html{ render 'schools/calculate_total_fees' }
+    #     format.js 
+    # end
   end
 
   private
