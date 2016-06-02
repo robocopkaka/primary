@@ -58,10 +58,11 @@ class SchoolsController < ApplicationController
   def show
     @school = School.find_by(id: params[:id])
     @first_child_class = params[:class_id]
-    @second_child_class = params[:class_id2]
+    @second_child_class = params[:second_id]
     @current_fees = 0
-    calculate_total_fees
-    byebug
+    calculate_all_fees
+    #byebug
+    #byebug
     if @school.reviews.blank? # checks if the school has any ratings, and if it doesn't, assign 0 to th average
       @average_review = 0
     else
@@ -86,25 +87,28 @@ class SchoolsController < ApplicationController
 
   def calculate_total_fees
     @school = School.find_by(id: params[:id])
-     @available_class = params[:class_id]
+     @available_class = params[:second_id]
+
+
     @current_fees = 0
     #first run to see if I can determine someone's school fees estimate for a particular class
-    if @available_class == "1"
-      @current_fees = @school.primary_one + @school.primary_two + @school.primary_three + @school.primary_four + @school.primary_five + @school.primary_six + @school.reg_fees + @school.exam_fees
-    elsif @available_class == "2"
-      @current_fees = @school.primary_two + @school.primary_three + @school.primary_four + @school.primary_five + @school.primary_six + @school.reg_fees + @school.exam_fees
-    elsif @available_class == "3"
-      @current_fees = @school.primary_three + @school.primary_four + @school.primary_five + @school.primary_six + @school.reg_fees + @school.exam_fees
-    elsif @available_class == "4"
-       @current_fees = @school.primary_four + @school.primary_five + @school.primary_six + @school.reg_fees + @school.exam_fees
-    elsif @available_class == "5"
-       @current_fees =@school.primary_five + @school.primary_six + @school.reg_fees + @school.exam_fees
-    elsif @available_class == "6"
-       @current_fees = @school.primary_six + @school.reg_fees + @school.exam_fees
-    else
+    # if @available_class == "1"
+    #   @current_fees = @school.primary_one + @school.primary_two + @school.primary_three + @school.primary_four + @school.primary_five + @school.primary_six + @school.reg_fees + @school.exam_fees
+    # elsif @available_class == "2"
+    #   @current_fees = @school.primary_two + @school.primary_three + @school.primary_four + @school.primary_five + @school.primary_six + @school.reg_fees + @school.exam_fees
+    # elsif @available_class == "3"
+    #   @current_fees = @school.primary_three + @school.primary_four + @school.primary_five + @school.primary_six + @school.reg_fees + @school.exam_fees
+    # elsif @available_class == "4"
+    #    @current_fees = @school.primary_four + @school.primary_five + @school.primary_six + @school.reg_fees + @school.exam_fees
+    # elsif @available_class == "5"
+    #    @current_fees =@school.primary_five + @school.primary_six + @school.reg_fees + @school.exam_fees
+    # elsif @available_class == "6"
+    #    @current_fees = @school.primary_six + @school.reg_fees + @school.exam_fees
+    # else
 
-    end
-
+    # end
+   
+    
     #@current_fees = @school.primary_one + @school.primary_two + @school.primary_three + @school.primary_four + @school.primary_five + @school.primary_six
     # respond_to do |format|
     #     format.html{ render 'schools/calculate_total_fees' }

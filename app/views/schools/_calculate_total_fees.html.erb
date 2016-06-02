@@ -1,8 +1,8 @@
-	<%= form_tag(@school, method: :get, remote: false) do |f|%>
+	<%= form_tag(@school, method: :get, remote: false) do |f,g|%>
 	   <%= label_tag "First child" %>
 	   <%= select_tag(:class_id, options_for_select(CurrentClass.all.map{ |f| [f.current, f.id]}),:selected => params[:class_id], :prompt => "Select Class") %>
 	   <%= label_tag "Second child" %>
-	   <%= select_tag(:class_id2, options_for_select(CurrentClass.all.map{ |f| [f.current, f.id]}),:selected => params[:class_id2], :prompt => "Select Class") %>
+	   <%= select_tag(:second_id, options_for_select(CurrentClass.all.map{ |g| [g.current, g.id]}),:selected => params[:second_id], :prompt => "Select Class") %>
 		<%= submit_tag "Calculate", class: "calculate_fees"%>
 	<% end %>
 
