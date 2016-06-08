@@ -20,6 +20,8 @@ Rails.application.routes.draw do
 
   get 'calculate_total_fees' => 'schools#calculate_total_fees'
 
+  get '/calculate_fees' => 'schools#calculate_all_fees1', as: 'calculate_fees'
+
   root 'schools#index'
 
   resources :schools do

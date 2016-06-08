@@ -59,9 +59,12 @@
             <div class="panel-heading clearfix">
               <div class="panel-title pull-left">
                 Hey! Want to find out how much it would cost to send a kid to school, click <%= link_to "here", calculate_total_fees_path(:id => @school.id) %>.
+                
               <!--   It's going to cost you <%= @current_fees %> to send your kid to this school -->
                 <%= render 'calculate_total_fees' %>
-                It's going to cost you <%= @current_fees %> to send your kid to this school
+                <div id="fees">
+                  
+                </div>
               </div>
             </div>
           </div>

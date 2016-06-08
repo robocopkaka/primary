@@ -1,12 +1,12 @@
-	<%= form_tag(@school, method: :get, remote: false) do |f,g|%>
-	   <%= label_tag "First child" %>
-	   <%= select_tag(:class_id, options_for_select(CurrentClass.all.map{ |f| [f.current, f.id]}),:selected => params[:class_id], :prompt => "Select Class") %>
-	   <%= label_tag "Second child" %>
-	   <%= select_tag(:second_id, options_for_select(CurrentClass.all.map{ |g| [g.current, g.id]}),:selected => params[:second_id], :prompt => "Select Class") %>
-		<%= submit_tag "Calculate", class: "calculate_fees"%>
-	<% end %>
-
 	
+		<%= form_tag(calculate_total_fees_path(id:@school.id), method: :get, remote: true) do |f,g|%>
+		   <%= label_tag "First child" %>
+		   <%= select_tag(:class_id, options_for_select(CurrentClass.all.map{ |f| [f.current, f.id]}),:selected => params[:class_id], :prompt => "Select Class") %>
+		   <%= label_tag "Second child" %>
+		   <%= select_tag(:second_id, options_for_select(CurrentClass.all.map{ |g| [g.current, g.id]}),:selected => params[:second_id], :prompt => "Select Class") %>
+			<%= submit_tag "Calculate", id: "calculate_fees"%>
+		<% end %>
+
 
 <!-- <script type = "text/javascript">
 $(".calculate_fees").on("click", function(){
@@ -18,4 +18,14 @@ $(".calculate_fees").on("click", function(){
         }
     });
 });
+</script>  -->
+<!-- 
+<script type = "text/javascript">
+$(".calculate_fees").on("click", function(){
+    $.ajax({
+        url: <%= @school.id %>,
+    }).done(function(msg) {
+    	$("#fees").html(msg.d);
+});
+});    
 </script>  -->

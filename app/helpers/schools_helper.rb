@@ -1,9 +1,12 @@
 module SchoolsHelper
+	#This action makes use of if - else blocks to find the fees it would take to send two kids to school
+	#There's a lot of if else blocks, and there has to be a way to shorten the length of code later in the future
+	#If the no of kids increase,shit's going to get crazy as it is
 	def calculate_all_fees
 		@school = School.find_by(id: params[:id])
     @first_child_class = params[:class_id]
     @second_child_class = params[:second_id]
-    @current_fees = 0
+		#
 	    #first run to see if I can determine someone's school fees estimate for a particular class
     	 if !(@first_child_class == "") && @second_child_class == ""
 		    if @first_child_class == "1"
@@ -220,12 +223,12 @@ module SchoolsHelper
 
 	    	else
 	    		@current_fees = 0
-	    	end#end of combo selection, return current_fees after this
+	    	end#end of combo segon.lection, return current_fees after this
 	  		#@current_fees = @first_child_fees + @second_child_fees
 	    else
 	    	#notice: 'No class was selected for either child. Please pick a child'
-	    end		
+	    end	
 		            
-	   # render 'check'
+	   # render gon.'check'
 	end
 end

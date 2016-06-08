@@ -59,8 +59,8 @@ class SchoolsController < ApplicationController
     @school = School.find_by(id: params[:id])
     @first_child_class = params[:class_id]
     @second_child_class = params[:second_id]
-    @current_fees = 0
-    calculate_all_fees
+    @current_fees
+    calculate_all_fees #call to helper method
     #byebug
     #byebug
     if @school.reviews.blank? # checks if the school has any ratings, and if it doesn't, assign 0 to th average
@@ -68,6 +68,7 @@ class SchoolsController < ApplicationController
     else
      @average_review =  @school.reviews.average(:rating).round(2)
     end
+
   end
 
   def check
@@ -91,29 +92,22 @@ class SchoolsController < ApplicationController
 
 
     @current_fees = 0
-    #first run to see if I can determine someone's school fees estimate for a particular class
-    # if @available_class == "1"
-    #   @current_fees = @school.primary_one + @school.primary_two + @school.primary_three + @school.primary_four + @school.primary_five + @school.primary_six + @school.reg_fees + @school.exam_fees
-    # elsif @available_class == "2"
-    #   @current_fees = @school.primary_two + @school.primary_three + @school.primary_four + @school.primary_five + @school.primary_six + @school.reg_fees + @school.exam_fees
-    # elsif @available_class == "3"
-    #   @current_fees = @school.primary_three + @school.primary_four + @school.primary_five + @school.primary_six + @school.reg_fees + @school.exam_fees
-    # elsif @available_class == "4"
-    #    @current_fees = @school.primary_four + @school.primary_five + @school.primary_six + @school.reg_fees + @school.exam_fees
-    # elsif @available_class == "5"
-    #    @current_fees =@school.primary_five + @school.primary_six + @school.reg_fees + @school.exam_fees
-    # elsif @available_class == "6"
-    #    @current_fees = @school.primary_six + @school.reg_fees + @school.exam_fees
-    # else
 
-    # end
-   
-    
-    #@current_fees = @school.primary_one + @school.primary_two + @school.primary_three + @school.primary_four + @school.primary_five + @school.primary_six
-    # respond_to do |format|
-    #     format.html{ render 'schools/calculate_total_fees' }
-    #     format.js 
-    # end
+    calculate_all_fees
+
+    respond_to do |format|
+        format.html {redirect_to @school}
+        format.js
+      end 
+    #first run to see if I can determine someone's school fees estimate for a particular class
+  end
+
+  def calculate_all_fees1
+    calculate_all_fees
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   private
